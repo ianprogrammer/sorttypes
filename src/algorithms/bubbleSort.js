@@ -6,7 +6,8 @@ export const bubbleSort = (array) => {
     let lessLen = 0
     let animations = []
     while (current < array.length - lessLen) {
-
+        
+        
         if (array[current] > array[count]) {
             oldvalue = array[count]
             animations.push({ currentIndex: current, nextIndex: count, oldValue: oldvalue, nextValue: array[current] })

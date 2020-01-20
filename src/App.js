@@ -1,11 +1,13 @@
 import React from 'react';
-import SortingAlgorithms from './components/sorting';
 import 'semantic-ui-css/semantic.min.css'
+import Home from './home/home';
+import HomepageLayout from './home/home-page';
+
 
 function App() {
   return (
     <div className="App">
-      <SortingAlgorithms />
+      <HomepageLayout />
     </div>
   );
 }

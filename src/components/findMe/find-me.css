@@ -1,0 +1,21 @@
+.grid {
+  margin: 1em 0 0;
+}
+
+.divButtons {
+  width: 100vw;
+  z-index: 100;
+  display: flex;
+  flex-direction: center;
+  align-items: center;
+  justify-content: center;
+}
+.modal-wrap-tabuleiro {
+  height: 100vh;
+  width: 100vw;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

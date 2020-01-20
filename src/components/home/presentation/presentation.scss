@@ -1,0 +1,60 @@
+.modal-wrap {
+    height: 100vh;
+    width: 100vw;
+    background: #1b1c1d;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex {
+   
+}
+
+$bg-color: #333;
+$bl-color: #22BAD9;
+
+
+
+.TypistExample {
+  
+  a {
+    color: inherit;
+    &:hover {
+      background-color: $bl-color;
+      color: white;
+      text-decoration: none;
+    }
+  }
+  &-header {
+    margin-top: 5%;
+    margin-bottom: 15%;
+    text-align: center;
+    font-size: 3em;
+    cursor: pointer;
+    color: $bl-color;
+  }
+  &-message {
+    color: whitesmoke;
+    font-size:40px;
+ 
+  
+    .flash {
+      color: $bl-color;
+      font-weight: bold;
+      text-decoration: underline;
+
+      animation-name: blinker;
+      animation-duration: 0.7s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      @keyframes blinker {
+        0% { opacity: 1.0; }
+        50% { opacity: 0.0; }
+        100% { opacity: 1.0; }
+      }
+    }
+  }
+}
