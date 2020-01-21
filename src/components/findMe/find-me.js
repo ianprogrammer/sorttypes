@@ -116,19 +116,45 @@ class FindMe extends React.Component {
     }
   }
   createNewBoard = () => {
-    const gridDefault = this.createGrid();
-    const grid = recursiveDivisionMaze(
-      gridDefault,
-      0,
-      19,
-      0,
-      49,
-      "horizontal",
-      false,
-      0
-    );
-    console.log(grid);
-    // this.setState({ grid: grid });
+
+
+    const {
+     
+      START_NODE_ROW,
+      START_NODE_COL,
+      FINISH_NODE_ROW,
+      FINISH_NODE_COL
+    } = this.state;
+
+    
+    let gridDefault = null
+    let grid = null
+    let len = 1
+    while (len === 1){
+      gridDefault = this.createGrid();
+      grid = recursiveDivisionMaze(
+       gridDefault,
+       0,
+       19,
+       0,
+       49,
+       "horizontal",
+       false,
+       0
+     );
+     dijkstra(
+       grid,
+       grid[START_NODE_ROW][START_NODE_COL],
+       grid[FINISH_NODE_ROW][FINISH_NODE_COL]
+     );
+     let newGrid = getNodesInShortestPathOrder(
+       grid[FINISH_NODE_ROW][FINISH_NODE_COL]
+     );
+     len = newGrid.length
+    }
+    
+    
+    
     let lastKValue = 0;
     for (let i = 0; i < grid.length; i++) {
       const element = grid[i];
