@@ -33,9 +33,7 @@ class HomepageHeading extends React.Component {
     renderButton: false
   };
 
-  onHeaderTyped = () => {
-    this.setState({ renderButton: true });
-  };
+
 
   render() {
     const { mobile } = this.props;
@@ -45,32 +43,16 @@ class HomepageHeading extends React.Component {
           as="h1"
           inverted
           style={{
-            fontSize: mobile ? "2em" : "4em",
-            fontWeight: "normal",
-            marginBottom: 0,
-            marginTop: mobile ? "1.5em" : "3em"
+            fontSize: mobile ? "2em" : "32pt",
+            lineHeight: '36pt',
+
+            margin: '0 0 20px 0',
+            marginTop: mobile ? "1.5em" : "32pt"
           }}
         >
           {" "}
-          <Typist
-            className="TypistExample-message"
-            cursor={{ hideWhenDone: true }}
-            onTypingDone={this.onHeaderTyped}
-            
-          >
-            Hello, I'm <strong>Ian Oliveira</strong>
-            <Typist.Delay ms={1250} />
-            <br />
-            Are you looking for a back-end
-            <Typist.Delay ms={500} />
-            <Typist.Backspace count={8} delay={1000} />
-            <Typist.Delay ms={750} />
-            front-end
-            <Typist.Delay ms={500} />
-            <Typist.Backspace count={9} delay={1000} />
-            <Typist.Delay ms={750} />
-            <strong>full-stack</strong> developer?
-          </Typist>
+          {" "}
+
         </Header>
         <br />
         <Transition
@@ -78,7 +60,7 @@ class HomepageHeading extends React.Component {
           animation="scale"
           duration={500}
         >
-          <Button size="huge">
+          <Button size="huge" style={{ margin: "auto" }}>
             Check My Skills
             <Icon name="right arrow" />
           </Button>
@@ -93,50 +75,73 @@ HomepageHeading.propTypes = {
 };
 
 class DesktopContainer extends Component {
-  state = {};
+  state = { renderButton: false };
 
   hideFixedMenu = () => this.setState({ fixed: false });
   showFixedMenu = () => this.setState({ fixed: true });
+  onHeaderTyped = () => {
+    this.setState({ renderButton: true });
+  };
 
   render() {
     const { children } = this.props;
     const { fixed } = this.state;
 
+
+
     return (
-      <Responsive getWidth={getWidth} minWidth={Responsive.onlyTablet.minWidth}>
+
+      <Responsive getWidth={getWidth} minWidth={Responsive.onlyTablet.minWidth}  >
         <Visibility
           once={false}
           onBottomPassed={this.showFixedMenu}
           onBottomPassedReverse={this.hideFixedMenu}
         >
-          <Segment
-            inverted
-            textAlign="center"
-            style={{ minHeight: 700, padding: "1em 0em" }}
-            vertical
-          >
-            <Menu
-              fixed={fixed ? "top" : null}
-              inverted={!fixed}
-              pointing={!fixed}
-              secondary={!fixed}
-              size="large"
-            >
-              <Container>
-                <Menu.Item as="a" active>
-                  HOME
-                </Menu.Item>
-                <Menu.Item as="a">SKILLS</Menu.Item>
-                <Menu.Item as="a">WORK</Menu.Item>
-                <Menu.Item as="a">PORTFOLIO</Menu.Item>
-              </Container>
-            </Menu>
-            <HomepageHeading />
-          </Segment>
+          <section id="home" className="flex height-fix">
+            <div id="pt" className="canvas">
+              <canvas id="canvas" width="1920" height="963" style={{ width: "1739px", height: "873px" }}></canvas>
+              </div>
+            <div className="flex">
+
+              <div className="text">
+                <Typist
+                  cursor={{ hideWhenDone: true }}
+                  onTypingDone={this.onHeaderTyped}
+                >
+                  Hello, I'm <span className="highlight">Ian Oliveira</span>.
+                  <Typist.Delay ms={1000} />
+                  <br />
+                  I'm a full-stack web developer.
+                  </Typist>
+              </div>
+
+              <Transition
+                visible={this.state.renderButton}
+                animation="scale"
+                duration={500}
+              >
+                <div className="button" dest="about">
+                  Check My Skills 
+                </div>
+              </Transition>
+
+
+              <nav className="flex desk" >
+                <div className="link-wrap">
+                  <div className="page-link active" dest="home">home</div>
+                  <div className="page-link" dest="portfolio">portfolio</div>
+                  <div className="page-link" dest="skills">skills</div>
+                  <div className="page-link" dest="personal-projects">personal projects</div>
+                </div>
+                <i className="mdi mdi-menu"></i>
+              </nav>
+            </div>
+          </section>
         </Visibility>
 
         {children}
       </Responsive>
+
     );
   }
 }
@@ -236,99 +241,21 @@ const HomepageLayout = () => (
       </Grid>
     </Segment>
 
-    <Segment style={{ padding: "0em" }} vertical>
-      <Grid celled="internally" columns="equal" stackable>
-        <Grid.Row textAlign="center">
-          <Grid.Column style={{ paddingBottom: "5em", paddingTop: "5em" }}>
-            <Header as="h3" style={{ fontSize: "2em" }}>
-              "What a Company"
-            </Header>
-            <p style={{ fontSize: "1.33em" }}>
-              That is what they all say about us
-            </p>
-          </Grid.Column>
-          <Grid.Column style={{ paddingBottom: "5em", paddingTop: "5em" }}>
-            <Header as="h3" style={{ fontSize: "2em" }}>
-              "I shouldn't have gone with their competitor."
-            </Header>
-            <p style={{ fontSize: "1.33em" }}>
-              <Image avatar src="/images/avatar/large/nan.jpg" />
-              <b>Nan</b> Chief Fun Officer Acme Toys
-            </p>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
-    </Segment>
-
-    <Segment style={{ padding: "8em 0em" }} vertical>
-      <Container text>
-        <Header as="h3" style={{ fontSize: "2em" }}>
-          Breaking The Grid, Grabs Your Attention
-        </Header>
-        <p style={{ fontSize: "1.33em" }}>
-          Instead of focusing on content creation and hard work, we have learned
-          how to master the art of doing nothing by providing massive amounts of
-          whitespace and generic content that can seem massive, monolithic and
-          worth your attention.
-        </p>
-        <Button as="a" size="large">
-          Read More
-        </Button>
-
-        <Divider
-          as="h4"
-          className="header"
-          horizontal
-          style={{ margin: "3em 0em", textTransform: "uppercase" }}
-        >
-          <a href="#">Case Studies</a>
-        </Divider>
-
-        <Header as="h3" style={{ fontSize: "2em" }}>
-          Did We Tell You About Our Bananas?
-        </Header>
-        <p style={{ fontSize: "1.33em" }}>
-          Yes I know you probably disregarded the earlier boasts as non-sequitur
-          filler content, but it's really true. It took years of gene splicing
-          and combinatory DNA research, but our bananas can really dance.
-        </p>
-        <Button as="a" size="large">
-          I'm Still Quite Interested
-        </Button>
-      </Container>
-    </Segment>
+   
 
     <Segment inverted vertical style={{ padding: "5em 0em" }}>
       <Container>
         <Grid divided inverted stackable>
           <Grid.Row>
-            <Grid.Column width={3}>
-              <Header inverted as="h4" content="About" />
-              <List link inverted>
-                <List.Item as="a">Sitemap</List.Item>
-                <List.Item as="a">Contact Us</List.Item>
-                <List.Item as="a">Religious Ceremonies</List.Item>
-                <List.Item as="a">Gazebo Plans</List.Item>
+            <Grid.Column  horizontal>
+            
+              <List link inverted horizontal>
+                <List.Item as="a">Github</List.Item>
+                <List.Item as="a">LinkedIn</List.Item>
+                <List.Item as="a">Twitter</List.Item>
               </List>
             </Grid.Column>
-            <Grid.Column width={3}>
-              <Header inverted as="h4" content="Services" />
-              <List link inverted>
-                <List.Item as="a">Banana Pre-Order</List.Item>
-                <List.Item as="a">DNA FAQ</List.Item>
-                <List.Item as="a">How To Access</List.Item>
-                <List.Item as="a">Favorite X-Men</List.Item>
-              </List>
-            </Grid.Column>
-            <Grid.Column width={7}>
-              <Header as="h4" inverted>
-                Footer Header
-              </Header>
-              <p>
-                Extra space for a call to action inside the footer that could
-                help re-engage users.
-              </p>
-            </Grid.Column>
+          
           </Grid.Row>
         </Grid>
       </Container>
